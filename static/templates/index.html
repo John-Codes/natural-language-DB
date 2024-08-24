@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top has-navbar-fixed-bottom">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>914IA</title>
+    
+
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+
+<!-- Fixed Menu and Title -->
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand" >
+        <!-- Hamburger Menu on the Left -->
+        <a role="button" class="navbar-burger ml-0 burger" aria-label="menu" aria-expanded="false" onclick="toggleMenu()">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        
+     <!-- Brand Title -->
+        <span class="navbar-item">
+            914IA 
+        </span>
+    </div>
+
+    <!-- Navigation Menu Items -->
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">Home</a>
+            <!-- <a class="navbar-item">Documentation</a>
+            <a class="navbar-item">Examples</a> -->
+        </div>
+    </div>
+</nav>
+
+
+<!-- End of Fixed Menu and Title -->
+
+
+
+
+
+<!-- Main Content -->
+<div class="container px-4" style="padding-top: 60px; padding-bottom: 50px; min-width: 3rem ">
+    <!-- List of Messages -->
+    <div id="messageList" class="columns is-multiline">
+        <div class="column is-full">
+            
+            
+            
+                    <!-- message -->
+                    <div class="card">
+                        <div class="card-content mb-3 ">
+                            <h2 class="title is-4">Demo AI Client Service Employee. </h2>
+                            <p>If you want the full powerful AI chat PDF solutions please contact Johnny Rodriguez we will repply 24/7 we are here to help you. </p>
+                            <br>
+                            <p><b>787-525-6420 </b> <br> - <i>CEO of 914IA</i></p>
+                            <br>
+                         
+                            <footer class="card-footer">
+                                <div style="display: flex; align-items: center;">
+                                    <!-- Clipboard Icon -->
+                                    <button class="button is-small no-border no-outline mr-2">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-clipboard"></i>
+                                        </span>
+                                    </button>
+                                    <!-- Like Icon -->
+                                    <button class="button is-small no-border no-outline mr-2">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-thumbs-up"></i>
+                                        </span>
+                                    </button>
+                                    <!-- Dislike Icon -->
+                                    <button class="button is-small no-border no-outline">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-thumbs-down"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+
+                       
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Fixed Footer with Auto-Growing Textarea and Buttons -->
+<nav class="navbar is-fixed-bottom" style="background-color: transparent; min-width: 3rem" >
+    <div class="container px-4 centered-input-container" >
+        <div class="field" >
+            <div class="textarea-container" >
+                <!-- oninput="autoResize(this)" -->
+
+                <textarea class="textarea"  id="messageInput" placeholder="Type a message..." oninput="autoResize(this)" rows="1" style="min-width: 2rem; min-height: 1rem;" ></textarea>
+                <div class="buttons-container">
+                    <!-- Upload Icon Button -->
+                    <div class="dropdown is-up" id="uploadDropdown">
+                        <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu" onclick="toggleDropdown()">
+                                <span class="icon is-small">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item" id="uploadFile">Upload file</a>
+                                <a href="#" class="dropdown-item" id="showModal">Modify CSV</a>
+                                <a href="#" class="dropdown-item">Clean logs</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Send Message Icon Button -->
+                    <button id="sendMessageButton" class="icon-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+             <!-- Hidden file input -->
+    <input type="file" id="fileInput" style="display: none;" />
+        </div>
+    </div>
+</nav>
+
+     <!-- Modal for modifying CSVs -->
+     <div class="modal" id="checkboxModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Select the headers</p>
+                <button class="delete" aria-label="close" id="closeCheckboxModal"></button>
+            </header>
+            <section class="modal-card-body">
+                <!-- Checkboxes will be dynamically inserted here -->
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button" id="closeCheckboxModalFooter">Close</button>
+                <button class="button is-primary" id="downloadCsv">Download CSV</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal for displaying response -->
+    <div class="modal" id="responseModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Response</p>
+                <button class="delete" aria-label="close" onclick="closeModal()"></button>
+            </header>
+            <section class="modal-card-body" id="modalContent">
+                <!-- Response content will be inserted here -->
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button" onclick="closeModal()">Close</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="static\client.js"></script>
+
+
+</body>
+</html>

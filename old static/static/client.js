@@ -102,14 +102,16 @@ async function showCheckboxModal(event) {
         console.error("Error fetching headers:", error);
     }
 }
+
 async function downloadModifiedCsv() {
     const checkboxes = document.querySelectorAll('#checkboxModal .modal-card-body input[type="checkbox"]');
-    const selectedHeaders = {};
+    const selectedHeaders = { headers: {} };
 
     checkboxes.forEach(checkbox => {
         const key = checkbox.value.trim(); // Remove leading and trailing spaces from the key
-        selectedHeaders[key] = checkbox.checked;
+        selectedHeaders.headers[key] = checkbox.checked;
     });
+  
 
     try {
         const response = await fetch("http://localhost:8000/download_modified_csv_file/", {
